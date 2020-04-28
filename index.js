@@ -18,7 +18,7 @@ var firstId
 /* BotInit() : Para iniciar o bot */
 function BotInit() {
     var query = {
-        q: "from:@felipebelisario",
+        q: "from:@labezin",
         result_type: "recent"
     }
 
