@@ -65,8 +65,6 @@ function BotInit() {
     }
 }
 
-/* Configure um intervalo de 5 minutos (em microsegundos) */
-setInterval(BotInit, 5 * 1000);
 
 /* Inicialize o bot Bot */
 BotInit();
