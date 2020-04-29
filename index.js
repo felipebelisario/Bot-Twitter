@@ -26,46 +26,46 @@ function BotInit() {
 
     function BotGotLatestTweet(error, data, response) {
         if (error) {
-            console.log('Bot não pôde achar o último tweet, : ' + error);
+            console.log('Bot não pôde achar o último tweet: ' + error);
         }
         else {
             var id = data.statuses[0].id_str
-            
-            if(firstId === undefined) {
+
+            if (firstId === undefined) {
                 firstId = id
             }
             else {
-                if(data.statuses[0].id_str !== firstId &&
+                if (data.statuses[0].id_str !== firstId &&
                     data.statuses[0].in_reply_to_status_id === null &&
                     data.statuses[0].in_reply_to_status_id_str === null &&
                     data.statuses[0].in_reply_to_user_id === null &&
                     data.statuses[0].in_reply_to_user_id_str === null &&
                     data.statuses[0].in_reply_to_screen_name === null &&
-                    data.statuses[0].text.substr(0, 1) !== 'RT') {
+                    !data.statuses[0].retweeted_status) {
 
-                        Bot.post('statuses/update', {
-                            status: 'fodase parcero',
-                            in_reply_to_status_id: id,
-                            auto_populate_reply_metadata: true
-                        }, BotRetweeted);
+                    Bot.post('statuses/update', {
+                        status: 'fodase parcero',
+                        in_reply_to_status_id: id,
+                        auto_populate_reply_metadata: true
+                    }, BotCommented);
 
                     firstId = id
                 }
             }
 
-            function BotRetweeted(error, response) {
+            function BotCommented(error, response) {
                 if (error) {
-                    console.log('Bot não pode retweetar, : ' + error);
+                    console.log('Bot não pode comentar: ' + error);
                 }
                 else {
-                    console.log('Bot retweetou : ' + id);
+                    console.log('Bot comentou: ' + id);
                 }
             }
         }
     }
 }
 
-/* Configure um intervalo de 5 minutos (em microsegundos) */
+/* Configure um intervalo de 5 segundos (em microsegundos) */
 setInterval(BotInit, 5 * 1000);
 
 /* Inicialize o bot Bot */
