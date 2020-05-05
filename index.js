@@ -12,7 +12,7 @@ const Bot = new Twit({
 
 // start stream and track tweets
 const stream = Bot.stream('statuses/filter', { track: ['@bot_passeiamao'] });
-var contador = 0
+var contador = 1
 
 console.log("Bot rodando... contador = " + contador)
 
@@ -27,11 +27,13 @@ function responseCallback(err, data, response) {
 // event handler
 stream.on('tweet', tweet => {
     contador = contador + 1
-    Bot.post('statuses/update', {
-        status: 'Ihaaa você acaba de passar a mão na bunda do LAB!\n\nAgora ela recebeu passadas de mão ' + contador + ' vez(es)',
-        in_reply_to_status_id: tweet.id_str,
-        auto_populate_reply_metadata: true
-    }, responseCallback);
+    if (tweet.text.indexOf("@bot_passeiamao") > -1) {
+        Bot.post('statuses/update', {
+            status: 'Ihaaa você acaba de passar a mão na bunda do LAB!\n\nAgora ela recebeu passadas de mão ' + contador + ' vez(es)',
+            in_reply_to_status_id: tweet.id_str,
+            auto_populate_reply_metadata: true
+        }, responseCallback);
+    }
 });
 
 
