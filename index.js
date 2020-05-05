@@ -26,7 +26,7 @@ function responseCallback(err, data, response) {
 
 // event handler
 stream.on('tweet', tweet => {
-    if (tweet.display_text_range[0] !== undefined && tweet.display_text_range[1] !== undefined) {
+    if (tweet.display_text_range !== undefined) {
         if (tweet.text.slice(tweet.display_text_range[0], tweet.display_text_range[1]) === "@bot_passeiamao") {
             contador = contador + 1
             Bot.post('statuses/update', {
