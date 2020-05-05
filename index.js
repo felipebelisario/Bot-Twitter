@@ -27,7 +27,14 @@ function responseCallback(err, data, response) {
 // event handler
 stream.on('tweet', tweet => {
     contador = contador + 1
-    console.log(tweet)
+
+    if (tweet.text.slice(tweet.display_text_range[0], tweet.display_text_range[1]) === "@bot_passeiamao") {
+        Bot.post('statuses/update', {
+            status: 'Ihaaa você acaba de passar a mão na bunda do LAB! \n\nAgora ela recebeu passadas de mão ' + contador + ' vez(es)',
+            in_reply_to_status_id: tweet.id_str,
+            auto_populate_reply_metadata: true
+        }, responseCallback);
+    }
 });
 
 
