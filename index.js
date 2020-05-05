@@ -26,14 +26,15 @@ function responseCallback(err, data, response) {
 
 // event handler
 stream.on('tweet', tweet => {
+    console.log(tweet)
     if (tweet.display_text_range) {
         if (tweet.text.slice(tweet.display_text_range[0], tweet.display_text_range[1]).indexOf("@bot_passeiamao" > -1)) {
             contador = contador + 1
-            Bot.post('statuses/update', {
-                status: 'Ihaaa você acaba de passar a mão na bunda do LAB! \n\nAgora ela recebeu passadas de mão ' + contador + ' vez(es)',
-                in_reply_to_status_id: tweet.id_str,
-                auto_populate_reply_metadata: true
-            }, responseCallback);
+            // Bot.post('statuses/update', {
+            //     status: 'Ihaaa você acaba de passar a mão na bunda do LAB! \n\nAgora ela recebeu passadas de mão ' + contador + ' vez(es)',
+            //     in_reply_to_status_id: tweet.id_str,
+            //     auto_populate_reply_metadata: true
+            // }, responseCallback);
         }
     }
 });
