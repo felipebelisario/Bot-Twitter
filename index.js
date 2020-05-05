@@ -26,7 +26,6 @@ function responseCallback(err, data, response) {
 
 // event handler
 stream.on('tweet', tweet => {
-    console.log(tweet)
     if (tweet.display_text_range) {
         if (tweet.text.slice(tweet.display_text_range[0], tweet.display_text_range[1]).indexOf("@bot_passeiamao" > -1)) {
             contador = contador + 1
