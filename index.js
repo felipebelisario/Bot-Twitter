@@ -24,7 +24,7 @@ function responseCallback(err, data, response) {
         console.log("Rastreado!");
 }
 
-function rastreiaCodigos(objectsList) {
+function rastreiaCodigos(tweet, objectsList) {
     TrackingCorreios.track(objectsList)
         .then((res) => {
             if(res.length > 0){
@@ -61,6 +61,7 @@ function rastreiaCodigos(objectsList) {
 
 // event handler
 stream.on('tweet', tweet => {
+    console.log("Passei aqui")
     if (!tweet.display_text_range) {
         objectsList = (tweet.text).split(" ")
     } else {
@@ -75,6 +76,6 @@ stream.on('tweet', tweet => {
         element.replace(",", "")
     })
 
-    rastreiaCodigos(objectsList)
+    rastreiaCodigos(tweet, objectsList)
     
 });
